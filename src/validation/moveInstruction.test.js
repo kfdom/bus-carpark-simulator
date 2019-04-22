@@ -1,47 +1,53 @@
 import validateMovementInput from './moveInstruction';
 
-test('Shoud be an object with error - Please enter movement and isValid false', () => {
+test('Shoud be an error when empty command', () => {
   const validationResult = validateMovementInput('');
   expect(validationResult).toEqual({ error: 'Please enter movement', isValid: false });
 });
 
-test('Shoud be an object with error - Invalid Command', () => {
+test('Shoud be an error when invalid keyword', () => {
   const validationResult = validateMovementInput('ABC');
   const expected = { error: 'Invalid Command (ABC)!' };
   expect(validationResult).toEqual(expect.objectContaining(expected));
 });
 
-test('Shoud be an object with error - Invalid Command - MOVE', () => {
+test('Shoud be an error when invalid MOVE command', () => {
   const validationResult = validateMovementInput('MOVE1');
   const expected = { error: 'Invalid Command (MOVE1)!' };
   expect(validationResult).toEqual(expect.objectContaining(expected));
 });
 
-test('Shoud be an object with error - Invalid Command LEFT', () => {
+test('Shoud be an error when invalid LEFT command', () => {
   const validationResult = validateMovementInput('LEFT2');
   const expected = { error: 'Invalid Command (LEFT2)!' };
   expect(validationResult).toEqual(expect.objectContaining(expected));
 });
 
-test('Shoud be an object with error - Invalid Command PLACE', () => {
+test('Shoud be an error when invalid RIGHT command', () => {
+  const validationResult = validateMovementInput('RIGHT3');
+  const expected = { error: 'Invalid Command (RIGHT3)!' };
+  expect(validationResult).toEqual(expect.objectContaining(expected));
+});
+
+test('Shoud be an error when invalid REPORT command', () => {
+  const validationResult = validateMovementInput('REPORT4');
+  const expected = { error: 'Invalid Command (REPORT4)!' };
+  expect(validationResult).toEqual(expect.objectContaining(expected));
+});
+
+test('Shoud be an error when invalid PLACE command', () => {
   const validationResult = validateMovementInput('PLACE 1,2');
   const expected = { error: 'Invalid PLACE Command (PLACE 1,2)!' };
   expect(validationResult).toEqual(expect.objectContaining(expected));
 });
 
-test('Shoud be an object with error - Invalid Command PLACE 2', () => {
-  const validationResult = validateMovementInput('PLACE 1,2');
-  const expected = { error: 'Invalid PLACE Command (PLACE 1,2)!' };
-  expect(validationResult).toEqual(expect.objectContaining(expected));
-});
-
-test('Shoud be an object with error - Invalid Command PLACE - Out of Range', () => {
+test('Shoud be an error when invalid PLACE command - Out of Range', () => {
   const validationResult = validateMovementInput('PLACE 6,2,WEST');
   const expected = { error: 'Invalid PLACE Command (PLACE 6,2,WEST), Out of Range!' };
   expect(validationResult).toEqual(expect.objectContaining(expected));
 });
 
-test('Shoud be an object with error - Invalid Command PLACE - Wrong facing', () => {
+test('Shoud be an error when invalid PLACE command - Wrong facing', () => {
   const validationResult = validateMovementInput('PLACE 1,2,EA');
   const expected = {
     error: 'Invalid PLACE Command (PLACE 1,2,EA), Facing must be NORTH, EAST, SOUTH, WEST!'
@@ -49,27 +55,27 @@ test('Shoud be an object with error - Invalid Command PLACE - Wrong facing', () 
   expect(validationResult).toEqual(expect.objectContaining(expected));
 });
 
-test('Shoud be an object with No error and isValid true - test MOVE - 1', () => {
+test('Shoud be valid on valid MOVE command', () => {
   const validationResult = validateMovementInput('MOVE');
   expect(validationResult).toEqual({ error: '', isValid: true });
 });
 
-test('Shoud be an object with No error and isValid true - test LEFT - 2', () => {
+test('Shoud be valid on valid LEFT command', () => {
   const validationResult = validateMovementInput('LEFT');
   expect(validationResult).toEqual({ error: '', isValid: true });
 });
 
-test('Shoud be an object with No error and isValid true - test RIGHT - 3', () => {
+test('Shoud be valid on valid RIGHT command', () => {
   const validationResult = validateMovementInput('RIGHT');
   expect(validationResult).toEqual({ error: '', isValid: true });
 });
 
-test('Shoud be an object with No error and isValid true - test PLACE 1,2,NORTH - 4', () => {
+test('Shoud be valid on valid PLACE command', () => {
   const validationResult = validateMovementInput('PLACE 1,2,NORTH');
   expect(validationResult).toEqual({ error: '', isValid: true });
 });
 
-test('Shoud be an object with No error and isValid true - test REPORT - 5', () => {
+test('Shoud be valid on valid REPORT command', () => {
   const validationResult = validateMovementInput('REPORT');
   expect(validationResult).toEqual({ error: '', isValid: true });
 });

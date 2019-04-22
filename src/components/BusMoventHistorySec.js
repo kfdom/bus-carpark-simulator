@@ -35,7 +35,7 @@ const BusMovementHistorySec = ({ busMovementHistory = [] }) => {
                 );
 
                 return (
-                  <tr key={index + 1}>
+                  <tr key={index + 1} style={{ color: item.type === 'Error' ? 'red' : undefined }}>
                     <td>{index + 1}</td>
                     <td>{item.type}</td>
                     <td>{item.message}</td>

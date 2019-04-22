@@ -7,7 +7,7 @@ const BusLocationReportSec = ({ reportLoc = [] }) => {
       {reportLoc.map((item, index) => {
         return (
           <div key={index} className="alert alert-success">
-            Bus Location : {item.xAxis},{item.yAxis},{item.face}{' '}
+            {index + 1}. Bus Location : {item.xAxis},{item.yAxis},{item.face}{' '}
           </div>
         );
       })}
