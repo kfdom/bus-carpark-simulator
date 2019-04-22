@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { calBusMovement } from '../utilities/utilities';
 import validateMovementInput from '../validation/moveInstruction';
 import TextInput from './formElements/TextInput';
 import Button from './formElements/Button';
@@ -65,7 +66,10 @@ const BusMovementInputSec = () => {
     }
   };
 
-  const onSubmitMovement = () => {};
+  const onSubmitMovement = () => {
+    setError('');
+    calBusMovement(movement);
+  };
 
   return (
     <FormContainer
