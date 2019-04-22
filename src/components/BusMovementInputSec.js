@@ -5,17 +5,18 @@ import TextInput from './formElements/TextInput';
 import Button from './formElements/Button';
 import FormContainer from './formElements/FormContainer';
 
-const BusMovementInputSec = () => {
-  const [movement, setMovement] = useState([]);
-  const [newOnChangeMovement, setNewOnChangeMovement] = useState('');
-  const [editMovementIndex, setEditMovementIndex] = useState();
-  const [editOnChangeMovement, setEditOnChangeMovement] = useState();
-  const [error, setError] = useState('');
+const BusMovementInputSec = ({ setReportLoc, setbusMovementHistory }) => {
+  const [movement, setMovement] = useState([]); //Array of movement
+  const [newOnChangeMovement, setNewOnChangeMovement] = useState(''); // onChange handler for user enter new line of movement
+  const [editMovementIndex, setEditMovementIndex] = useState(); //store rowIndex of movement in edit mode
+  const [editOnChangeMovement, setEditOnChangeMovement] = useState(); //onChange handler for edit mode's movement
+  const [error, setError] = useState(''); // throw error when user key in invalid movement
 
   const newMoveRef = useRef();
   const editMoveRef = useRef();
   const addBtnRef = useRef();
 
+  //add new movement to the array
   const addNewMovement = () => {
     const validationResult = validateMovementInput(newOnChangeMovement);
 
@@ -29,6 +30,7 @@ const BusMovementInputSec = () => {
     }
   };
 
+  //delete movement from the array
   const deleteMovement = movementIndex => {
     var filtered = movement.filter(function(value, index) {
       return movementIndex !== index;
@@ -37,11 +39,13 @@ const BusMovementInputSec = () => {
     setMovement(filtered);
   };
 
+  //load edit mode for particular row
   const loadEditMovement = index => {
     setEditMovementIndex(index);
     setEditOnChangeMovement(movement[index]);
   };
 
+  //save modified data for particular row
   const saveEditMovement = index => {
     const validationResult = validateMovementInput(editMoveRef.current.value);
 
@@ -55,20 +59,28 @@ const BusMovementInputSec = () => {
     }
   };
 
+  //clear movements in array
   const resetMovement = () => {
     setMovement([]);
     setEditMovementIndex();
+    setReportLoc([]);
+    setbusMovementHistory([]);
   };
 
+  //enter trigger button click to submit new movement
   const handleEnter = e => {
     if (e.key === 'Enter') {
       addBtnRef.current.click();
     }
   };
 
+  //submit new movement
   const onSubmitMovement = () => {
     setError('');
-    calBusMovement(movement);
+
+    const { ReportLocation, messages } = calBusMovement(movement);
+    setReportLoc(ReportLocation);
+    setbusMovementHistory(messages);
   };
 
   return (

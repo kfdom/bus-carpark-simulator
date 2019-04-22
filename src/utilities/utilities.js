@@ -99,6 +99,8 @@ export const calBusMovement = (MovementArr = []) => {
       }
     }
   });
+
+  return { ReportLocation, messages };
 };
 
 const execActionPlace = currentBusPos => {
