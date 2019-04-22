@@ -23,6 +23,10 @@ Follow the steps below to install and run the application
 * A new tab or browser will open up and running the application
 * alternately you can open a URL http://localhost:3000/ to access the application
 
+### Testing
+
+* Type in "npm run test" to start automation test by Jest
+
 ## Built With
 
 * This project was bootstrapped with Create React App.
